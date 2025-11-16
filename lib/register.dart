@@ -16,7 +16,14 @@ class RegisterPage extends StatelessWidget {
           Widget branding = Container(
             width: isSmallScreen ? double.infinity : constraints.maxWidth * 0.4,
             height: isSmallScreen ? 200 : double.infinity,
-            color: Colors.black,
+            decoration: BoxDecoration(
+              color: Colors.black,
+              image: const DecorationImage(
+                image: AssetImage('assets/img/BG.png'),
+                fit: BoxFit.cover,
+                opacity: 0.12,
+              ),
+            ),
             child: Center(
               child: LayoutBuilder(builder: (ctx, inner) {
                 final panelWidth = isSmallScreen
@@ -78,18 +85,53 @@ class RegisterPage extends StatelessWidget {
                       TextField(
                         decoration: InputDecoration(
                           labelText: "Full Name",
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 16),
+                          labelStyle: TextStyle(color: Colors.grey[700]),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                                color: Colors.grey.shade400, width: 1),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                                color: Colors.grey.shade400, width: 1),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                                color: Colors.blue.shade700, width: 1.5),
                           ),
                         ),
                       ),
                       const SizedBox(height: 15),
 
                       TextField(
+                        keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           labelText: "Email",
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 16),
+                          labelStyle: TextStyle(color: Colors.grey[700]),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                                color: Colors.grey.shade400, width: 1),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                                color: Colors.grey.shade400, width: 1),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                                color: Colors.blue.shade700, width: 1.5),
                           ),
                         ),
                       ),
@@ -98,8 +140,25 @@ class RegisterPage extends StatelessWidget {
                       TextField(
                         decoration: InputDecoration(
                           labelText: "Username",
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 16),
+                          labelStyle: TextStyle(color: Colors.grey[700]),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                                color: Colors.grey.shade400, width: 1),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                                color: Colors.grey.shade400, width: 1),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                                color: Colors.blue.shade700, width: 1.5),
                           ),
                         ),
                       ),
@@ -109,8 +168,25 @@ class RegisterPage extends StatelessWidget {
                         obscureText: true,
                         decoration: InputDecoration(
                           labelText: "Password",
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 16),
+                          labelStyle: TextStyle(color: Colors.grey[700]),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                                color: Colors.grey.shade400, width: 1),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                                color: Colors.grey.shade400, width: 1),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: BorderSide(
+                                color: Colors.blue.shade700, width: 1.5),
                           ),
                         ),
                       ),

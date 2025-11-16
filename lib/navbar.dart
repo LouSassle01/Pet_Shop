@@ -7,7 +7,14 @@ class LeftSideNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 200,
-      color: Colors.black,
+      decoration: BoxDecoration(
+        color: Colors.black,
+        image: const DecorationImage(
+          image: AssetImage('assets/img/BG.png'),
+          fit: BoxFit.cover,
+          opacity: 0.12,
+        ),
+      ),
       child: Column(
         children: [
           // USER ICON OR LOGO

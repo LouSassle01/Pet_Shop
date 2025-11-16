@@ -16,44 +16,50 @@ class LoginPage extends StatelessWidget {
 
           // Branding Panel on the left side
           Widget branding = Container(
-            color: const Color.fromARGB(255, 0, 0, 0),
             width: isSmallScreen ? double.infinity : constraints.maxWidth * 0.4,
             height: isSmallScreen ? 200 : double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.black,
+              image: DecorationImage(
+                image: const AssetImage('assets/img/BG.png'),
+                fit: BoxFit.cover,
+                opacity: 0.12,
+              ),
+            ),
             child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // RESPONSIVE LOGO
-                  LayoutBuilder(builder: (context, inner) {
-                    final panelWidth = isSmallScreen
-                        ? constraints.maxWidth
-                        : constraints.maxWidth * 0.4;
+              child: LayoutBuilder(builder: (context, inner) {
+                final panelWidth = isSmallScreen
+                    ? constraints.maxWidth
+                    : constraints.maxWidth * 0.4;
 
-                    // Logo scales based on screen width
-                    final logoSize = (panelWidth * 0.35).clamp(60.0, 300.0);
+                // Logo scales based on panel width
+                final logoSize = (panelWidth * 0.35).clamp(60.0, 300.0);
 
-                    return Image.asset(
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset(
                       'assets/img/LogoBig.png',
                       width: logoSize,
                       fit: BoxFit.contain,
-                    );
-                  }),
-
-                  const SizedBox(height: 20),
-
-                  // TITLE TEXT
-                  Text(
-                    "WELCOME!",
-                    style: TextStyle(
-                      fontSize: titleFontSize,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      letterSpacing: 2,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
+
+                    const SizedBox(height: 20),
+
+                    // TITLE TEXT
+                    Text(
+                      "WELCOME!",
+                      style: TextStyle(
+                        fontSize: titleFontSize,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        letterSpacing: 2,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                );
+              }),
             ),
           );
 
