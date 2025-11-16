@@ -14,110 +14,140 @@ class RegisterPage extends StatelessWidget {
           double paddingSize = isSmallScreen ? 20 : 60;
 
           Widget branding = Container(
-            color: Colors.green.shade700,
             width: isSmallScreen ? double.infinity : constraints.maxWidth * 0.4,
             height: isSmallScreen ? 200 : double.infinity,
+            color: Colors.black,
             child: Center(
-              child: Text(
-                "CREATE ACCOUNT",
-                style: TextStyle(
-                  fontSize: titleFontSize,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  letterSpacing: 1.5,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          );
+              child: LayoutBuilder(builder: (ctx, inner) {
+                final panelWidth = isSmallScreen
+                    ? constraints.maxWidth
+                    : constraints.maxWidth * 0.4;
+                final logoWidth = (panelWidth * 0.35).clamp(56.0, 220.0);
 
-          Widget registerForm = Padding(
-            padding: EdgeInsets.all(paddingSize),
-            child: Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
+                    Image.asset(
+                      'assets/img/LogoBig.png',
+                      width: logoWidth,
+                      fit: BoxFit.contain,
+                    ),
+                    const SizedBox(height: 12),
                     Text(
-                      "REGISTER",
+                      "CREATE ACCOUNT",
                       style: TextStyle(
                         fontSize: titleFontSize,
                         fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        letterSpacing: 1.5,
                       ),
-                      textAlign: TextAlign.left,
-                    ),
-                    const SizedBox(height: 30),
-
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: "Full Name",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: "Email",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: "Username",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-
-                    TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        labelText: "Password",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 30),
-
-                    SizedBox(
-                      height: 55,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green.shade700,
-                        ),
-                        onPressed: () {},
-                        child: const Text(
-                          "REGISTER",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text("Already registered? "),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/login');
-                          },
-                          child: const Text("Login"),
-                        ),
-                      ],
+                      textAlign: TextAlign.center,
                     ),
                   ],
+                );
+              }),
+            ),
+          );
+
+          Widget registerForm = Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: const AssetImage('assets/img/BG.png'),
+                fit: BoxFit.cover,
+                opacity: 0.15,
+              ),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(paddingSize),
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        "REGISTER",
+                        style: TextStyle(
+                          fontSize: titleFontSize,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      const SizedBox(height: 30),
+
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: "Full Name",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: "Email",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: "Username",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+
+                      TextField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          labelText: "Password",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+
+                      SizedBox(
+                        height: 55,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue.shade700,
+                            foregroundColor: Colors.black,
+                          ),
+                          onPressed: () {},
+                          child: const Text(
+                            "REGISTER",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Already registered? "),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/login');
+                            },
+                            child: const Text("Login"),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
