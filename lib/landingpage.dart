@@ -5,29 +5,10 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("POS Landing Page"),
-        backgroundColor: Colors.blue.shade700,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "Welcome to POS System!",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: () {
-                // Log out and go back to login
-                Navigator.pushReplacementNamed(context, '/login');
-              },
-              child: const Text("Logout"),
-            ),
-          ],
-        ),
+    return const Center(
+      child: Text(
+        "Welcome to Home Page",
+        style: TextStyle(fontSize: 25),
       ),
     );
   }
