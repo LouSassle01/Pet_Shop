@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
-class LeftSideNavBar extends StatelessWidget {
+class LeftSideNavBar extends StatefulWidget {
   const LeftSideNavBar({super.key});
 
+  @override
+  State<LeftSideNavBar> createState() => _LeftSideNavBarState();
+}
+
+class _LeftSideNavBarState extends State<LeftSideNavBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,74 +34,139 @@ class LeftSideNavBar extends StatelessWidget {
             ),
           ),
 
-
-          // HOME
-          navItem(
-            context: context,
+          _NavItem(
             icon: Icons.home,
-            text: "Home",
-            route: "/landing",
+            text: 'Home',
+            route: '/landing',
           ),
 
-          // PRODUCT PAGE
-          navItem(
-            context: context,
+          _NavItem(
             icon: Icons.shopping_bag,
-            text: "Product Page",
-            route: "/product",
+            text: 'Product Page',
+            route: '/product',
           ),
 
-          // SETTINGS
-          navItem(
-            context: context,
+          _NavItem(
             icon: Icons.settings,
-            text: "Settings",
-            route: "/settings",
+            text: 'Settings',
+            route: '/settings',
           ),
 
-          // LOGOUT
-          navItem(
-            context: context,
+          _NavItem(
             icon: Icons.logout,
-            text: "Logout",
-            route: "/logout",
+            text: 'Logout',
+            route: '/logout',
           ),
         ],
       ),
     );
   }
+}
 
-  Widget navItem({
-    required BuildContext context,
-    required IconData icon,
-    required String text,
-    required String route,
-  }) {
+class _NavItem extends StatefulWidget {
+  final IconData icon;
+  final String text;
+  final String route;
+
+  const _NavItem({required this.icon, required this.text, required this.route});
+
+  @override
+  State<_NavItem> createState() => _NavItemState();
+}
+
+class _NavItemState extends State<_NavItem> {
+  bool _isPressed = false;
+
+  void _onTapDown(TapDownDetails details) {
+    setState(() => _isPressed = true);
+  }
+
+  void _onTapUp(TapUpDetails details) {
+    setState(() => _isPressed = false);
+  }
+
+  void _onTapCancel() {
+    setState(() => _isPressed = false);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final baseColor = Colors.blue.shade700;
+    final pressedColor = Colors.blue.shade900;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(8),
-        onTap: () {
-          Navigator.pushReplacementNamed(context, route);
+      child: GestureDetector(
+        onTapDown: _onTapDown,
+        onTapUp: (d) {
+          _onTapUp(d);
+          Navigator.pushReplacementNamed(context, widget.route);
         },
-        child: Container(
+        onTapCancel: _onTapCancel,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 120),
           height: 52,
           padding: const EdgeInsets.symmetric(horizontal: 12),
+          transform: Matrix4.identity()..scale(_isPressed ? 0.985 : 1.0),
           decoration: BoxDecoration(
-            color: Colors.blue.shade700,
+            color: _isPressed ? pressedColor : baseColor,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: Colors.blue.shade900, width: 1.5),
-            boxShadow: const [
-              BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 2)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: _isPressed ? 2 : 4,
+                offset: Offset(0, _isPressed ? 1 : 2),
+              ),
             ],
           ),
-          child: Row(
+          child: Stack(
             children: [
-              Icon(icon, color: Colors.white),
-              const SizedBox(width: 12),
-              Text(
-                text,
-                style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+              Center(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(widget.icon, color: Colors.white, size: 20),
+                    const SizedBox(width: 12),
+                    Text(
+                      widget.text,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+              ),
+
+              // Shiny overlay that appears while pressed
+              AnimatedOpacity(
+                opacity: _isPressed ? 0.18 : 0.0,
+                duration: const Duration(milliseconds: 120),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: FractionallySizedBox(
+                    widthFactor: 1.2,
+                    heightFactor: 1.6,
+                    child: Transform.rotate(
+                      angle: -0.4,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.white.withOpacity(0.45),
+                              Colors.white.withOpacity(0.0),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            stops: const [0.0, 0.6],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
